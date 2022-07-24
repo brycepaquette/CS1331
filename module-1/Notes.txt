@@ -1,6 +1,0 @@
-To compile .java file run: javac <fileName>.java
-Once this creates a .class file, execute it using: java <fileName>
-
-ie.
-javac HelloWorld.java
-java HelloWorld
