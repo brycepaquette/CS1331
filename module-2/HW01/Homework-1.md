@@ -1,4 +1,4 @@
-#Problem Description
+# Problem Description
 You’ve now been introduced to the basics of programming in Java. This means you can write simple, but useful programs! 
 We’re going to practice using those skills by creating and manipulating several variables, of different types.
 
