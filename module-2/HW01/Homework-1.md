@@ -63,7 +63,7 @@ When completing homeworks for CS1331 you may talk with other students about:
 - Key course concepts and Java language features used in your solution
 - You may not discuss, show, or share by other means the specifics of your code, including screenshots, file sharing, or showing someone else the code on your computer, or use code shared by others.
 
-##The Vocareum (code editor) interface has six main components:
+## The Vocareum (code editor) interface has six main components:
 
 - The Drop-Down in the top left. This lets you choose from multiple available files. Note that this drop-down will only be visible in assignments that require multiple files.
 - The Build / Run button. For all assignments in this course, the build and run button will perform the same action: compile your code and run a file scan. Building and running your code will not count towards your total allowed submission attempts, therefore you are free to build / run as many times as needed.
