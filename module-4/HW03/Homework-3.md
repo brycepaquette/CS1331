@@ -47,6 +47,7 @@ Note: For the autograder to run properly:
 ## Example Outputs
 User input is *bolded*. Please make sure to follow the exact formatting as shown below.
 
+```
 Welcome to Battleship!
 
 PLAYER 1, ENTER YOUR SHIPS' COORDINATES.
@@ -202,6 +203,7 @@ Final boards:
 2 X - - - -
 3 - X O - -
 4 - - - - X
+```
 
 ## Allowed Imports
 To prevent trivialization of the assignment, you may only import java.util.Scanner.
