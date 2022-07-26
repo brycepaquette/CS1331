@@ -1,2 +1,2 @@
-# CS1331xI
-Edx Course from Georgia Tech - Introduction to Object-Oriented Programming with Java I: Foundations and Syntax Basics
+# CS1331
+Edx Professional Certificate from Georgia Tech - Introduction to Object-Oriented Programming with Java
