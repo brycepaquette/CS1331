@@ -16,19 +16,20 @@ public class Battleship {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		// Create array to store location boards
+		char[][][] locBoards = new char[2][5][5];
+		int[] pScores = {0,0};
+		
 		System.out.println(welcomeMsg);
 
-		// Get coordinates from P1 and create location board
-		System.out.println("PLAYER 1, ENTER YOUR SHIP'S COORDINATES.");
-		char[][] p1LocBoard = createLocationBoard(sc);
-		printBattleShip(p1LocBoard);
-		printLines(100);
-
-		// Get coordinates from P2 and create location board
-		System.out.println("PLAYER 2, ENTER YOUR SHIP'S COORDINATES.");
-		char[][] p2LocBoard = createLocationBoard(sc);
-		printBattleShip(p2LocBoard);
-		printLines(100);
+		// Get coordinates from P1 & P2 and create location board
+		for (int i=0; i < 2; i++){
+			int plyrNum = i + 1;
+			System.out.printf("PLAYER %d, ENTER YOUR SHIP'S COORDINATES.\n", plyrNum);
+			locBoards[i] = createLocationBoard(sc);
+			printBattleShip(locBoards[i]);
+			printLines(100);
+		}		
 
 		// Create Target History Boards to visually track player moves
 		char[][][] tarBoards = {
@@ -36,31 +37,45 @@ public class Battleship {
 			createCharArr(5, 5, noShip)
 		};
 
-		int[] pScores = {0,0};
-		while(pScores[0] != NUM_SHIPS || pScores[1] != NUM_SHIPS) {
-			for (int i = 1; i <=2; i++) {
-				String hitMsg = String.format("Player %d, enter hit row/column: ", i);
+		
+		while(pScores[0] != NUM_SHIPS && pScores[1] != NUM_SHIPS) {
+			for (int i = 0; i < 2; i++) {
+				if (pScores[0] == NUM_SHIPS || pScores[1] == NUM_SHIPS) {
+					break;
+				}
+				int plyrNum = i + 1;
+				int otherPlyrNum = (plyrNum == 1) ? 2 : 1;
+				int otherPlyrIndex = (plyrNum == 1) ? 1 : 0;
+				String hitInputMsg = String.format("Player %d, enter hit row/column: ", plyrNum);
 				do {
-					int[] coorArr = getCoordinates(sc, hitMsg);
-					if (!validMove(coorArr, tarBoards[i-1])) {
+					int[] xy = getCoordinates(sc, hitInputMsg);
+					char value = tarBoards[i][xy[0]][xy[1]];
+					boolean fired = (value == sunkShip || value == missedShip);
+					if (fired) {
 						System.out.println(firedErrMsg);
 					}
-					
-					x = coorArr[0];
-					y = coorArr[1];
-				} while (!validMove(coorArr, tarBoards[i-1]);
-			}
-			
+					else {						
+						boolean hit = locBoards[otherPlyrIndex][xy[0]][xy[1]] == bShip;
+						if (hit) {
+							pScores[i] += 1;
+							tarBoards[i][xy[0]][xy[1]] = sunkShip;
+							String hitMsg = String.format("PLAYER %d HIT PLAYER %d's SHIP!\n", plyrNum, otherPlyrNum);
+							System.out.println(hitMsg);
+						}
+						else {
+							tarBoards[i][xy[0]][xy[1]] = missedShip;
+							String hitMsg = String.format("PLAYER %d MISSED!\n", plyrNum);
+							System.out.println(hitMsg);
+						}
+						printBattleShip(tarBoards[i]);
+						System.out.printf("P1 Score: %d --- P2 Score: %d\n", pScores[0], pScores[1]);
+						break;
+					}	
+				} while (true);
+			}			
 		}
-		
-	}
-
-	// validates coordinates are available to place ship/ make hit
-	public static boolean validMove(int[] coorArr, char[][] board) {
-		int x = coorArr[0];
-		int y = coorArr[1];
-		boolean firedSpot = board[x][y] == sunkShip || board[x][y] == missedShip; 
-		return !firedSpot;
+		int plyrwins = pScores[0] == 5 ? 1 : 2;
+		System.out.printf("GAME OVER. PLAYER %d WINS!", plyrwins);
 	}
 
 	// Get hit coordinates from player
@@ -70,9 +85,10 @@ public class Battleship {
 			// clears the scanner in the event more than 2 ints are provided
 			sc.reset();
 			System.out.print(msg);
-			int x = sc.hasNextInt() ? sc.nextInt() : INVALID_INT;
+			String[] xy = sc.nextLine().split(" ");
+			int x = xy.length > 0 ? Integer.parseInt(xy[0]) : INVALID_INT;
 			boolean xInvalid = x > upperBound || x < lowerBound || x == INVALID_INT;
-			int y = !xInvalid && sc.hasNextInt() ? sc.nextInt() : INVALID_INT;
+			int y = xy.length > 1 ? Integer.parseInt(xy[1]) : INVALID_INT;
 			boolean yInvalid = y > upperBound || y < lowerBound || y == INVALID_INT;
 			if (xInvalid || yInvalid) {
 				System.out.println(invalidErrMsg);
