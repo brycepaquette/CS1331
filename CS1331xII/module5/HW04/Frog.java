@@ -7,7 +7,7 @@ public class Frog {
     private String name;
     private int age;
     private double tongueSpeed;
-    private boolean isFroglet;
+    private boolean isFroglet = true;
     private static String species = "Rare Pepe";
     public static int DEFAULT_AGE = 5; 
     public static double DEFAULT_TONGUE_SPEED = 5;

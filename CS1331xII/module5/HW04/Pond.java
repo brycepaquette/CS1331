@@ -2,7 +2,7 @@ public class Pond {
     
     public static void main(String[] args) {
         Frog frog1 = new Frog("Peepo");
-        Frog frog2 = new Frog("Pepe", (10 / 12), 15);
+        Frog frog2 = new Frog("Pepe",  10, 15);
         Frog frog3 = new Frog("Peepaw", ((int) 4.6*12), 5);
         Frog myFrog = new Frog("Mr. Ribbit");
 
