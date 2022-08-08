@@ -69,10 +69,10 @@ public class Frog {
 
     public String toString() {
         if (isFroglet) {
-            return String.format("My name is %s and I'm a rare froglet! I'm %i months old and my tongue has a speed of %.2f", name, age, tongueSpeed);
+            return String.format("My name is %s and I'm a rare froglet! I'm %d months old and my tongue has a speed of %.2f", name, age, tongueSpeed);
         }
         else {
-            return String.format("My name is %s and I'm a rare frog. I'm %i months old and my tongue has a speed of %.2f", name, age, tongueSpeed);
+            return String.format("My name is %s and I'm a rare frog. I'm %d months old and my tongue has a speed of %.2f", name, age, tongueSpeed);
         }
     }
 
