@@ -52,4 +52,35 @@ public class Frog {
     public void grow() {
         grow(1);
     }
+
+    public void eat(Fly fly) {
+        if (fly.isDead()) {
+            return;
+        }
+        boolean isCaught = tongueSpeed > fly.getSpeed();
+        if (isCaught && ((fly.getMass() / age) >= 0.5)) {
+            grow();
+            fly.setMass(0);
+        }
+        else {
+            fly.grow(1);
+        }
+    }
+
+    public String toString() {
+        if (isFroglet) {
+            return String.format("My name is %s and I'm a rare froglet! I'm %i months old and my tongue has a speed of %.2f", name, age, tongueSpeed);
+        }
+        else {
+            return String.format("My name is %s and I'm a rare frog. I'm %i months old and my tongue has a speed of %.2f", name, age, tongueSpeed);
+        }
+    }
+
+    public static String getSpecies() {
+        return species;
+    }
+
+    public static void setSpecies(String newSpecies) {
+        species = newSpecies;
+    }
 }
