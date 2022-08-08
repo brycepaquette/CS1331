@@ -54,6 +54,8 @@ public class Fly {
     public void grow(int size) {
         // Loop through each size increase by 1
         for (int i = 0; i < size; i++) {
+            // Increase mass by 1
+            mass += 1;
             // If mass is less than 20: increases speed by 1 for every mass the Fly grows until it reaches 20 mass.
             if (mass < 20) {
                 speed += 1;

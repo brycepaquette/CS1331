@@ -28,4 +28,28 @@ public class Frog {
         this.tongueSpeed = tongueSpeed;
     }
 
+    // methods
+
+    public void grow(int numMonths) {
+        for (int i = 0; i < numMonths; i++) {
+            // Then it ages the Frog by the given number of months and increases tongueSpeed by 1 for every month the Frog grows until it becomes 12 months old.
+            age += 1;
+            if (age < 12) {
+                tongueSpeed += 1;
+            }
+            // If the Frog is 30 months old or more, then decrease tongueSpeed by 1 for every month that it ages beyond 30 months.You must not decrease tongueSpeed to less than 5.
+            else if ((age >= 30) && (tongueSpeed > 5)) {
+                tongueSpeed -= 1;
+            }
+            else {
+                continue;
+            }
+        }
+        // Update isFroglet
+        isFroglet = (age > 1) && (age < 7);
+    }
+
+    public void grow() {
+        grow(1);
+    }
 }
