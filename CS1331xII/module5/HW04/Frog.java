@@ -83,4 +83,6 @@ public class Frog {
     public static void setSpecies(String newSpecies) {
         species = newSpecies;
     }
+
+    
 }
