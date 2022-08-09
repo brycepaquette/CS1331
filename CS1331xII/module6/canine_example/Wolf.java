@@ -45,6 +45,9 @@ public class Wolf extends Canine implements Comparable<Wolf> {
         };
 
         System.out.println(String.format("Unsorted Pack: %s", (Arrays.toString(pack))));
+        Arrays.sort(pack);
+        System.out.println(String.format("Sorted Pack: %s", Arrays.toString(pack)));
+        
     }
     // public static void main(String[] args) {
     //     Wolf alpha = new Wolf(17.1, 1);
