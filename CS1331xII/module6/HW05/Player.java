@@ -4,7 +4,7 @@
  * @author CS 1331 TAs
  * @version 1.1
  */
-public abstract class Player implements Comparable<Player> {
+public abstract class Player implements Comparable<Player>, Impostor, Crewmate {
     private String name;
     private int susLevel;
     private boolean frozen;

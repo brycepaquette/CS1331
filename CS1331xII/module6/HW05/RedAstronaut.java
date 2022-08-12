@@ -50,4 +50,31 @@ public class RedAstronaut extends Player {
         }        
         suspect.gameOver();
     }
+
+    public void freeze(Player p) {
+        
+        if (isFrozen() || p instanceof Impostor || p.isFrozen()) {
+            return;
+        }
+        else{
+            p.setFrozen(true);
+        }
+    }
+
+    public void sabotage(Player p) {
+        if (isFrozen() || p instanceof Impostor || p.isFrozen()) {
+            return;
+        }
+        
+        int pSusLevel = p.getSusLevel();
+        int newSusLevel;
+        if (getSusLevel() < 20) {
+            newSusLevel = (int) (pSusLevel * 1.5);
+            p.setSusLevel(newSusLevel);
+        }
+        else {
+            newSusLevel = (int) (pSusLevel * 1.25);
+            p.setSusLevel(newSusLevel);
+        }
+    } 
 }
