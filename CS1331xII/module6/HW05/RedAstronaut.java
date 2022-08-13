@@ -92,4 +92,12 @@ public class RedAstronaut extends Player implements Impostor {
         String frozenStr = isFrozen() ? "frozen" : "not frozen";
         return String.format("My name is %s, and I have a suslevel of %d. I am currently %s. I am an %s player!", getName(), getSusLevel(), frozenStr, skill);
     }
+
+    public String getSkill() {
+        return skill;
+    }
+
+    public void setString(String skill) {
+        this.skill = skill;
+    }
 }
