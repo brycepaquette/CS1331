@@ -50,12 +50,17 @@ public class RedAstronaut extends Player implements Impostor {
 
     public void freeze(Player p) {
         
+        int redAstroSusLevel = super.getSusLevel();
         if (super.isFrozen() || p instanceof Impostor || p.isFrozen()) {
             return;
         }
-        else{
+        if (redAstroSusLevel < p.getSusLevel()){
             p.setFrozen(true);
         }
+        else {
+            super.setSusLevel(redAstroSusLevel * 2);
+        }
+        super.gameOver();
     }
 
     public void sabotage(Player p) {
