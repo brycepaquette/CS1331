@@ -21,11 +21,10 @@ public class BlueAstronaut extends Player implements Crewmate {
 
     // methods
     public void emergencyMeeting() {
-        if (isFrozen()) { return; }
+        if (super.isFrozen()) { return; }
 
         Player[] players = Player.getPlayers();
         Arrays.sort(players);
-        String crewmateName = getName();
         int suspectIndex = players.length - 1;
         Player suspect = players[suspectIndex];
 
@@ -48,7 +47,60 @@ public class BlueAstronaut extends Player implements Crewmate {
         else {
             suspect.setFrozen(true);
         }
+        super.gameOver();
+    }
+
+    public void completeTask() {
+        if (super.isFrozen()) { return; };
+
+        if (taskSpeed > 20) {
+            numTasks -= 2;
+        }
+        else {
+            numTasks--;
+        }
+
+        numTasks = numTasks < 0 ? 0 : numTasks;
+
+        if (numTasks == 0) {
+            System.out.println("Ihave completed all my tasks.");
+            int newSusLevel = (int) (super.getSusLevel() * 0.5);
+            super.setSusLevel(newSusLevel);
+        }
+    }
+
+    public boolean equals(Object o) {
+        if (o instanceof BlueAstronaut) {
+            BlueAstronaut otherBlueAstro = (BlueAstronaut) o;
+            boolean playerVarsEqual = super.equals(o);
+            boolean numTasksEqual = numTasks == otherBlueAstro.numTasks;
+            boolean taskSpeedEqual = taskSpeed == otherBlueAstro.taskSpeed;
+
+            return (playerVarsEqual && numTasksEqual && taskSpeedEqual);
+        }
+        else {
+            return false;
+        }
         
     }
 
+    public String toString() {
+        return super.toString() + String.format("I have %d left over.", numTasks);
+    }
+
+    public int getNumTasks() {
+        return numTasks;
+    }
+
+    public int getTaskSpeed() {
+        return taskSpeed;
+    }
+
+    public void setNumTasks(int numTasks) {
+        this.numTasks = numTasks;
+    }
+
+    public void setTaskSpeed(int taskSpeed) {
+        this.taskSpeed = taskSpeed;
+    }
 }

@@ -20,14 +20,13 @@ public class RedAstronaut extends Player implements Impostor {
     // methods
     public void emergencyMeeting() {
         if (isFrozen()) { return; }
-        
+
         Player[] players = Player.getPlayers();
         Arrays.sort(players);
-        String imposterName = getName();
         int suspectIndex = players.length - 1;
         Player suspect = players[suspectIndex];
 
-        while (suspect.isFrozen() || suspect.getName() == imposterName) {
+        while (suspect.isFrozen() || super.equals(suspect)) {
             suspectIndex--;
             suspect = players[suspectIndex];
         }
@@ -46,12 +45,12 @@ public class RedAstronaut extends Player implements Impostor {
         else {
             suspect.setFrozen(true);
         }        
-        suspect.gameOver();
+        super.gameOver();
     }
 
     public void freeze(Player p) {
         
-        if (isFrozen() || p instanceof Impostor || p.isFrozen()) {
+        if (super.isFrozen() || p instanceof Impostor || p.isFrozen()) {
             return;
         }
         else{
@@ -60,13 +59,13 @@ public class RedAstronaut extends Player implements Impostor {
     }
 
     public void sabotage(Player p) {
-        if (isFrozen() || p instanceof Impostor || p.isFrozen()) {
+        if (super.isFrozen() || p instanceof Impostor || p.isFrozen()) {
             return;
         }
         
         int pSusLevel = p.getSusLevel();
         int newSusLevel;
-        if (getSusLevel() < 20) {
+        if (super.getSusLevel() < 20) {
             newSusLevel = (int) (pSusLevel * 1.5);
             p.setSusLevel(newSusLevel);
         }
@@ -77,18 +76,20 @@ public class RedAstronaut extends Player implements Impostor {
     } 
 
     public boolean equals(Object o) {
-        RedAstronaut otherRedAstro = (RedAstronaut) o;
-        boolean nameEqual = getName() == otherRedAstro.getName();
-        boolean frozenEqual = isFrozen() == otherRedAstro.isFrozen();
-        boolean susLevelEqual = getSusLevel() == otherRedAstro.getSusLevel();
-        boolean skillEqual = skill == otherRedAstro.skill;
-
-        return (nameEqual && frozenEqual && susLevelEqual && skillEqual);
+        if (o instanceof RedAstronaut) {
+            RedAstronaut otherRedAstro = (RedAstronaut) o;
+            boolean playerVarsEqual = super.equals(o);
+            boolean skillEqual = skill == otherRedAstro.skill;
+            return (playerVarsEqual && skillEqual);
+        }
+        else {
+            return false;
+        }
     }
 
     public String toString() {
-        String frozenStr = isFrozen() ? "frozen" : "not frozen";
-        return String.format("My name is %s, and I have a suslevel of %d. I am currently %s. I am an %s player!", getName(), getSusLevel(), frozenStr, skill);
+        
+        return super.toString() + String.format("I am an %s player!", skill);
     }
 
     public String getSkill() {
