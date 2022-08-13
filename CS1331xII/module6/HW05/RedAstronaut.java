@@ -97,7 +97,7 @@ public class RedAstronaut extends Player implements Impostor {
         return skill;
     }
 
-    public void setString(String skill) {
+    public void setSkill(String skill) {
         this.skill = skill;
     }
 }
