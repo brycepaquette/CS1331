@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class RedAstronaut extends Player {
+public class RedAstronaut extends Player implements Impostor {
     
     // variables
     private String skill; // represents the skill of a Red crewmate as a String value of either inexperienced, experienced, or expert.
@@ -77,4 +77,19 @@ public class RedAstronaut extends Player {
             p.setSusLevel(newSusLevel);
         }
     } 
+
+    public boolean equals(Object o) {
+        RedAstronaut otherRedAstro = (RedAstronaut) o;
+        boolean nameEqual = getName() == otherRedAstro.getName();
+        boolean frozenEqual = isFrozen() == otherRedAstro.isFrozen();
+        boolean susLevelEqual = getSusLevel() == otherRedAstro.getSusLevel();
+        boolean skillEqual = skill == otherRedAstro.skill;
+
+        return (nameEqual && frozenEqual && susLevelEqual && skillEqual);
+    }
+
+    public String toString() {
+        String frozenStr = isFrozen() ? "frozen" : "not frozen";
+        return String.format("My name is %s, and I have a suslevel of %d. I am currently %s. I am an %s player!", getName(), getSusLevel(), frozenStr, skill);
+    }
 }

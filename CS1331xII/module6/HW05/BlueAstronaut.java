@@ -1,3 +1,3 @@
-public class BlueAstronaut {
+public class BlueAstronaut implements Crewmate {
     
 }
