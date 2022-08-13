@@ -14,15 +14,13 @@ public class RedAstronaut extends Player implements Impostor {
     }
 
     public RedAstronaut(String name) {
-        super(name, DEFAULT_SUS);
-        this.skill = DEFAULT_SKILL;
+        this(name, DEFAULT_SUS, DEFAULT_SKILL);
     }
 
     // methods
     public void emergencyMeeting() {
-        if (isFrozen()) {
-            return;
-        }
+        if (isFrozen()) { return; }
+        
         Player[] players = Player.getPlayers();
         Arrays.sort(players);
         String imposterName = getName();
