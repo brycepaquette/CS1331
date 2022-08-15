@@ -6,7 +6,7 @@ public class Calculator {
         Scanner sc = new Scanner(System.in);
 
         // My added code: Array of operations, error string
-        String[] opArr = {"add", "subtract", "multiply", "divide", "aplhabetize"};
+        String[] opArr = {"add", "subtract", "multiply", "divide", "alphabetize"};
         String errorMsg = "Invalid input entered. Terminating...";
         int intOne = 0;
         int intTwo;
@@ -19,12 +19,12 @@ public class Calculator {
         // Prompt the user to enter an operation. This operation must be processed as case-insensitive
         System.out.println("List of Operations: " + String.join(" ", opArr));
         
-        System.out.print("Enter an operation: ");
+        System.out.println("Enter an operation: ");
         String op = sc.nextLine().toLowerCase();
         switch(op) {
             case "add":
                 // If the user is performing an add/subtract operation, prompt the user to enter two integers.
-                System.out.print("Enter two integers: ");
+                System.out.println("Enter two integers: ");
 
                 if (sc.hasNextInt())
                     intOne = sc.nextInt();
@@ -35,12 +35,12 @@ public class Calculator {
                 }    
                 else {
                     System.out.println(errorMsg);
-                    System.exit(1);
+                    return;
                 }
                 break;
             case "subtract":
                 // If the user is performing an add/subtract operation, prompt the user to enter two integers.
-                System.out.print("Enter two integers: ");
+                System.out.println("Enter two integers: ");
 
                 if (sc.hasNextInt())
                     intOne = sc.nextInt();
@@ -51,12 +51,12 @@ public class Calculator {
                 }
                 else {
                     System.out.println(errorMsg);
-                    System.exit(1);
+                    return;
                 }
                 break;
             case "multiply":
                 // If the user is performing a multiply/divide operation, prompt the user to enter two doubles.
-                System.out.print("Enter two doubles: ");
+                System.out.println("Enter two doubles: ");
 
                 if (sc.hasNextDouble())
                     dblOne = sc.nextDouble();
@@ -67,12 +67,12 @@ public class Calculator {
                 }
                 else {
                     System.out.println(errorMsg);
-                    System.exit(1);
+                    return;
                 }
                 break;
             case "divide":
                 // If the user is performing a multiply/divide operation, prompt the user to enter two doubles.
-                System.out.print("Enter two doubles: ");
+                System.out.println("Enter two doubles: ");
 
                 if (sc.hasNextDouble())
                     dblOne = sc.nextDouble();
@@ -84,25 +84,29 @@ public class Calculator {
                     }
                     else {
                         System.out.println(errorMsg);
-                        System.exit(1);
+                        return;
                     } 
                 }
                 else {
                     System.out.println(errorMsg);
-                    System.exit(1);
+                    return;
                 }
                 break;
             case "alphabetize":
                 // If the user is performing an alphabetize operation, prompt the user to enter two words.
-                System.out.print("Enter two words: ");
+                System.out.println("Enter two words: ");
                 String input = sc.nextLine();
                 String[] words = input.split(" ");
-                if ((words.length == 2) && (input.matches("[a-zA-Z\\s\\n]+"))) {
+
+                for (int i=0; i < 2; i++) {
+                    words[i] = words[i].replaceAll("^\"|\"$", "");
+                }
+                if ((words.length == 2) && (input.matches("[a-zA-Z\\s\\n\"]+"))) {
                     int compareWords = words[0].compareTo(words[1]);
                     if ((compareWords == 0) || (words[0].equalsIgnoreCase(words[1]))) {
                         System.out.println("Answer: Chicken or Egg.");
                     }
-                    else if (compareWords > 0) {
+                    else if (compareWords < 0) {
                         System.out.println("Answer: " + words[0] + " comes before " + words[1] + " alphabetically.");
                     }
                     else {
@@ -111,14 +115,14 @@ public class Calculator {
                 }
                 else {
                     System.out.println(errorMsg);
-                    System.exit(1);
+                    return;
                 }
                 break;
             default:
                 // If the user enters an invalid operation, the program should print the following error message and terminate gracefully. "Invalid input entered. Terminating..."
                 System.out.println(errorMsg);
-                System.exit(1);
+                return;
         } 
-        System.exit(0);
+        return;
     }
 }
