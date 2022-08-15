@@ -1,5 +1,3 @@
-import org.w3c.dom.NameList;
-
 public class Frog {
     
     // variables
@@ -31,20 +29,21 @@ public class Frog {
     // methods
 
     public void grow(int numMonths) {
-        for (int i = 0; i < numMonths; i++) {
-            // Then it ages the Frog by the given number of months and increases tongueSpeed by 1 for every month the Frog grows until it becomes 12 months old.
-            age += 1;
-            if (age < 12) {
-                tongueSpeed += 1;
-            }
-            // If the Frog is 30 months old or more, then decrease tongueSpeed by 1 for every month that it ages beyond 30 months.You must not decrease tongueSpeed to less than 5.
-            else if ((age >= 30) && (tongueSpeed > 5)) {
-                tongueSpeed -= 1;
-            }
-            else {
-                continue;
-            }
+        int addOneThreshold = 12;
+        int totalMonths = numMonths + age;
+        if (age < addOneThreshold) {
+            int increase = addOneThreshold - age;
+            tongueSpeed += increase;
+            numMonths -= increase;
         }
+
+        age = totalMonths;
+
+        if (age >= 30) {
+            int decrease = age - 30;
+            tongueSpeed = tongueSpeed - decrease < 5 ? 5 : tongueSpeed - decrease;
+        }
+        
         // Update isFroglet
         isFroglet = (age > 1) && (age < 7);
     }
@@ -69,10 +68,10 @@ public class Frog {
 
     public String toString() {
         if (isFroglet) {
-            return String.format("My name is %s and I'm a rare froglet! I'm %d months old and my tongue has a speed of %.2f", name, age, tongueSpeed);
+            return String.format("My name is %s and I'm a rare froglet! I'm %d months old and my tongue has a speed of %.2f.", name, age, tongueSpeed);
         }
         else {
-            return String.format("My name is %s and I'm a rare frog. I'm %d months old and my tongue has a speed of %.2f", name, age, tongueSpeed);
+            return String.format("My name is %s and I'm a rare frog. I'm %d months old and my tongue has a speed of %.2f.", name, age, tongueSpeed);
         }
     }
 

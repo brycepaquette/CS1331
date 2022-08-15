@@ -4,8 +4,8 @@ public class Pond {
         Frog frog1 = new Frog("Peepo");
         Frog frog2 = new Frog("Pepe",  10, 15);
         Frog frog3 = new Frog("Peepaw", ((int) 4.6*12), 5);
-        Frog myFrog = new Frog("Mr. Ribbit");
-
+        Frog myFrog = new Frog("Mr. Ribbit", 5, 5);
+        myFrog.grow(8);
         Fly fly1 = new Fly(1, 3);
         Fly fly2 = new Fly(6);
         Fly fly3 = new Fly(2,4);

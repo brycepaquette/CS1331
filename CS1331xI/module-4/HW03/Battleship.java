@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+
 public class Battleship {
 	static String invalidErrMsg = "Invalid coordinates. Choose different coordinates.";
 	static String occupiedErrMsg = "You already have a ship there. Choose different coordinates.";
@@ -13,13 +14,13 @@ public class Battleship {
 	static char bShip = '@';
 	static char sunkShip = 'X';
 	static char missedShip = 'O';
+	String $inandout;
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		// Create array to store location boards
 		char[][][] locBoards = new char[2][5][5];
 		int[] pScores = {0,0};
-		
 		System.out.println(welcomeMsg);
 
 		// Get coordinates from P1 & P2 and create location board
@@ -59,23 +60,26 @@ public class Battleship {
 						if (hit) {
 							pScores[i] += 1;
 							tarBoards[i][xy[0]][xy[1]] = sunkShip;
-							String hitMsg = String.format("PLAYER %d HIT PLAYER %d's SHIP!\n", plyrNum, otherPlyrNum);
+							String hitMsg = String.format("PLAYER %d HIT PLAYER %d's SHIP!", plyrNum, otherPlyrNum);
 							System.out.println(hitMsg);
 						}
 						else {
 							tarBoards[i][xy[0]][xy[1]] = missedShip;
-							String hitMsg = String.format("PLAYER %d MISSED!\n", plyrNum);
+							String hitMsg = String.format("PLAYER %d MISSED!", plyrNum);
 							System.out.println(hitMsg);
 						}
 						printBattleShip(tarBoards[i]);
-						System.out.printf("P1 Score: %d --- P2 Score: %d\n", pScores[0], pScores[1]);
 						break;
 					}	
 				} while (true);
 			}			
 		}
 		int plyrwins = pScores[0] == 5 ? 1 : 2;
-		System.out.printf("GAME OVER. PLAYER %d WINS!", plyrwins);
+		System.out.printf("PLAYER %d WINS! YOU SUNK ALL OF YOUR OPPONENT'S SHIPS!\n\n", plyrwins);
+		System.out.println("Final Boards:\n");
+		printBattleShip(locBoards[0]);
+		System.out.println();
+		printBattleShip(locBoards[1]);
 	}
 
 	// Get hit coordinates from player
@@ -84,7 +88,7 @@ public class Battleship {
 		while (true) {
 			// clears the scanner in the event more than 2 ints are provided
 			sc.reset();
-			System.out.print(msg);
+			System.out.println(msg);
 			String[] xy = sc.nextLine().split(" ");
 			int x = xy.length > 0 ? Integer.parseInt(xy[0]) : INVALID_INT;
 			boolean xInvalid = x > upperBound || x < lowerBound || x == INVALID_INT;
@@ -99,7 +103,7 @@ public class Battleship {
 				return coorArr;
 			}
 		}
-
+		
 	}
 	
 	// Initialize a 2D char array
