@@ -123,6 +123,7 @@ public class Calculator {
                 System.out.println(errorMsg);
                 return;
         } 
+        sc.close();
         return;
     }
 }
