@@ -89,7 +89,7 @@ public abstract class Player implements Comparable<Player> {
     public String toString() {
         String frozenString = frozen ? "frozen" : "not frozen";
         return "My name is " + this.name + ", and I have a susLevel of "
-                + this.susLevel + ". I am currently " + frozenString + ".";
+                + this.susLevel + ". I am currently " + frozenString + ". ";
     }
 
     /**
