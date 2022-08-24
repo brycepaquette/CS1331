@@ -40,4 +40,28 @@ public abstract class Pet {
         return painLevel;
     }
 
+    // Returns the time taken (in minutes) to treat the pet
+    abstract int treat();
+
+    public void speak() {
+        String s = String.format("Hello! My name is %s", name);
+        if (painLevel > 5) { s = s.toUpperCase(); }
+        System.out.println(s);
+    }
+
+    public boolean equals(Object o) {
+        if (o instanceof Pet) {
+            Pet pet2 = (Pet) o;
+            String name2 = pet2.getName();
+            return name == name2;
+        }
+        else {
+            return false;
+        }
+    }
+
+    protected void heal() {
+        health = 1.0;
+        painLevel = 1;
+    }
 }
