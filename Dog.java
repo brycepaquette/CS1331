@@ -40,8 +40,14 @@ public class Dog extends Pet {
     }
 
     public void speak() {
-        for (int i = 0; i < super.getPainLevel(); i++) {
-            super.speak();
+        super.speak();
+        int painLevel = super.getPainLevel();
+        String word = "bark";
+        for (int i = 0; i < painLevel; i++) {
+            if (i != 0) {
+                System.out.print(" ");
+            }
+            System.out.print(word);
         }        
     }
 
