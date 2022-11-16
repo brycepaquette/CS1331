@@ -11,9 +11,11 @@ public class GenericLinkedList<E> {
     }
 
     private Node<E> head; // the only instance variable of the list
+    private Node<E> tail;
     
     public GenericLinkedList() {   
         head = null; // the list starts off empty
+        tail = null;
     }
 
     public boolean isEmpty() {
@@ -21,7 +23,12 @@ public class GenericLinkedList<E> {
     }
 
     public void addToFront(E newData) {
-        head = new Node<E>(newData, head);
+        Node <E> node = new Node<>(newData, head);
+        
+        if(isEmpty()) {
+            tail = node;
+        }
+        head = node;
     }
 
     public void addToRear(E newData) {
@@ -30,12 +37,38 @@ public class GenericLinkedList<E> {
 
         if(isEmpty()) {
             head = node;
-        } else {
+        } 
+        else {
             while(current.next != null) {
                 current = current.next;
             }
             current.next = node;
         }
+        tail = node;
+    }
+
+    public Node<E> removeFromFront() {
+        Node <E> node = head;
+        head = head.next;
+        return node;
+    }
+
+    public Node<E> removeFromRear() {
+        Node<E> current = head;
+        Node<E> result = null;
+        if (!isEmpty() && head != tail) {
+            while(current.next != tail) {
+                current = current.next;
+            }
+            tail = current;
+            result = current.next;
+        }
+        else {
+            result = tail;
+            head = null;
+            tail = null;
+        }
+        return result;
     }
 
     public String toString() {
@@ -73,5 +106,15 @@ public class GenericLinkedList<E> {
         System.out.println(favBabySongs.toString());
         System.out.println(favBabySongs.contains("Humpty Dumpty"));
         System.out.println(favBabySongs.contains("Baby Shark"));
+        assert favBabySongs.tail.next == null;
+        System.out.println("Removed: " + ((favBabySongs.removeFromFront()).data).toString());
+        System.out.println("Removed: " + ((favBabySongs.removeFromRear()).data).toString());
+        System.out.println(favBabySongs.tail.data.toString());
+        System.out.println("Removed: " + ((favBabySongs.removeFromRear()).data).toString());
+        System.out.println(favBabySongs.tail.data.toString());
+        System.out.println("Removed: " + ((favBabySongs.removeFromRear()).data).toString());
+        System.out.println(favBabySongs.tail.data.toString());
+        System.out.println("Removed: " + ((favBabySongs.removeFromRear()).data).toString());
+        System.out.println(favBabySongs.tail);
     }
 }
