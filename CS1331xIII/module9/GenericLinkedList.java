@@ -47,10 +47,13 @@ public class GenericLinkedList<E> {
         tail = node;
     }
 
-    public Node<E> removeFromFront() {
-        Node <E> node = head;
+    public E removeFromFront() {
+        if(isEmpty()) {
+            return null;
+        }
+        E removedData = head.data;
         head = head.next;
-        return node;
+        return removedData;
     }
 
     public Node<E> removeFromRear() {
