@@ -64,20 +64,50 @@ public class LinkedList<T> implements List<T> {
     }
 
     public T getAtIndex(int index) {
-        Node<T> current = head; // initiate pointer to traverse the list
+        Node<T> pointer = head; // initiate pointer to traverse the list
         
         if(isEmpty()) {
             return null;
         }
-        else if(index < 0 || index > (size() - 1)) {
+        else if(index < 0 || index > (size - 1)) {
             throw new IllegalArgumentException("Your index is out of bounds");
         }
         else {
             for(int i=0; i < index; i++) {
-                current = current.next;
+                pointer = pointer.getNext();
             }
         }
-        return current.data;
+        return pointer.getData();
+    }
+
+    public T removeAtIndex(int index) {
+        Node<T> pointer = head;
+        Node<T> removedNode;
+
+        if(isEmpty()){
+            return null;
+        }
+        else if(index < 0 || index > (size - 1)) {
+            throw new IllegalArgumentException("Your index is out of bounds");
+        }
+        else if(index == 0) {
+            removedNode = pointer;
+            head = pointer.getNext();
+        }
+        else {
+            for(int i = 0; i < index - 1; i++) {
+                pointer = pointer.getNext();
+            }
+            removedNode = pointer.getNext();
+            pointer.setNext(removedNode.getNext());
+            
+            tail = removedNode == tail ? pointer : tail;
+        }
+
+        size -= 1;
+
+        return removedNode.getData();
+
     }
 
 
@@ -85,12 +115,15 @@ public class LinkedList<T> implements List<T> {
     public static void main(String[] args) {
 
         LinkedList<String> list = new LinkedList<>();
+        LinkedList<String> listCopy;
         LinkedList<String> emptyList = new LinkedList<>();
+
         // Test initialized list
         assert list.getHead() == null;
         assert list.getTail() == null;
         assert list.size() == 0;
         System.out.println("Initialized list passed (Head & Tail are null, size is 0)");
+
         //Test addAtIndex()
         try {
             list.addAtIndex(null, 0);
@@ -109,6 +142,10 @@ public class LinkedList<T> implements List<T> {
         list.addAtIndex("0", 0);
         list.addAtIndex("2", 1);
         list.addAtIndex("1", 1);
+
+        // Copy list
+        LinkedList<String> list2 = new LinkedList<String>(list);
+
         // Test getAtIndex()
         assert list.getAtIndex(0).equals("0");
         assert list.getAtIndex(1).equals("1");
@@ -123,5 +160,16 @@ public class LinkedList<T> implements List<T> {
             assert e.toString().equals("Your index is out of bounds");
             System.out.printf("PASSED - getAtIndex(100) throws %s\n", e.toString());
         }
+
+        // Test removeAtIndex()
+        assert emptyList.removeAtIndex(0) == null;
+        System.out.println("PASSED - removeAtIndex() returns null for empty list");
+        assert list.removeAtIndex(0).equals("0") && list.getHead().getData().equals("1");
+        System.out.println("PASSED - removeAtIndex(head) returns expected output & sets new head correctly");
+
+        // Test clear()
+        list.clear();
+        assert list.getHead() == null && list.getTail() == null && list.size() == 0;
+        System.out.println("PASSED - clear() sets head & tail to null, size to 0");
     }
 }
