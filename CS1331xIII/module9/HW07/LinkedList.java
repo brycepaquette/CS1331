@@ -110,66 +110,70 @@ public class LinkedList<T> implements List<T> {
 
     }
 
+    public T remove(T data) {
+        return "string";
+    }
+
 
 
     public static void main(String[] args) {
 
-        LinkedList<String> list = new LinkedList<>();
-        LinkedList<String> listCopy;
-        LinkedList<String> emptyList = new LinkedList<>();
+        // LinkedList<String> list = new LinkedList<>();
+        // LinkedList<String> listCopy;
+        // LinkedList<String> emptyList = new LinkedList<>();
 
-        // Test initialized list
-        assert list.getHead() == null;
-        assert list.getTail() == null;
-        assert list.size() == 0;
-        System.out.println("Initialized list passed (Head & Tail are null, size is 0)");
+        // // Test initialized list
+        // assert list.getHead() == null;
+        // assert list.getTail() == null;
+        // assert list.size() == 0;
+        // System.out.println("Initialized list passed (Head & Tail are null, size is 0)");
 
-        //Test addAtIndex()
-        try {
-            list.addAtIndex(null, 0);
-        }
-        catch (Exception e) {
-            assert e.toString().equals("You cannot add null data to the list");
-            System.out.printf("PASSED - list.addAtIndex(null, index) throws %s", e.toString());
-        }
-        try {
-            list.addAtIndex("hello", 100);
-        }
-        catch(Exception e) {
-            assert e.toString().equals("Your index is out of bounds");
-            System.out.printf("PASSED - addAtIndex('hello', 100) throws %s\n", e.toString());
-        }
-        list.addAtIndex("0", 0);
-        list.addAtIndex("2", 1);
-        list.addAtIndex("1", 1);
+        // //Test addAtIndex()
+        // try {
+        //     list.addAtIndex(null, 0);
+        // }
+        // catch (Exception e) {
+        //     assert e.toString().equals("You cannot add null data to the list");
+        //     System.out.printf("PASSED - list.addAtIndex(null, index) throws %s", e.toString());
+        // }
+        // try {
+        //     list.addAtIndex("hello", 100);
+        // }
+        // catch(Exception e) {
+        //     assert e.toString().equals("Your index is out of bounds");
+        //     System.out.printf("PASSED - addAtIndex('hello', 100) throws %s\n", e.toString());
+        // }
+        // list.addAtIndex("0", 0);
+        // list.addAtIndex("2", 1);
+        // list.addAtIndex("1", 1);
 
-        // Copy list
-        LinkedList<String> list2 = new LinkedList<String>(list);
+        // // Copy list
+        // LinkedList<String> list2 = new LinkedList<String>(list);
 
-        // Test getAtIndex()
-        assert list.getAtIndex(0).equals("0");
-        assert list.getAtIndex(1).equals("1");
-        assert list.getAtIndex(2).equals("2");
-        System.out.println("PASSED - List is in order: [0,1,2]");
-        assert emptyList.getAtIndex(0) == null;
-        System.out.println("PASSED - getAtIndex() returns null for empty list");
-        try {
-            list.getAtIndex(100);
-        }
-        catch(Exception e) {
-            assert e.toString().equals("Your index is out of bounds");
-            System.out.printf("PASSED - getAtIndex(100) throws %s\n", e.toString());
-        }
+        // // Test getAtIndex()
+        // assert list.getAtIndex(0).equals("0");
+        // assert list.getAtIndex(1).equals("1");
+        // assert list.getAtIndex(2).equals("2");
+        // System.out.println("PASSED - List is in order: [0,1,2]");
+        // assert emptyList.getAtIndex(0) == null;
+        // System.out.println("PASSED - getAtIndex() returns null for empty list");
+        // try {
+        //     list.getAtIndex(100);
+        // }
+        // catch(Exception e) {
+        //     assert e.toString().equals("Your index is out of bounds");
+        //     System.out.printf("PASSED - getAtIndex(100) throws %s\n", e.toString());
+        // }
 
-        // Test removeAtIndex()
-        assert emptyList.removeAtIndex(0) == null;
-        System.out.println("PASSED - removeAtIndex() returns null for empty list");
-        assert list.removeAtIndex(0).equals("0") && list.getHead().getData().equals("1");
-        System.out.println("PASSED - removeAtIndex(head) returns expected output & sets new head correctly");
+        // // Test removeAtIndex()
+        // assert emptyList.removeAtIndex(0) == null;
+        // System.out.println("PASSED - removeAtIndex() returns null for empty list");
+        // assert list.removeAtIndex(0).equals("0") && list.getHead().getData().equals("1");
+        // System.out.println("PASSED - removeAtIndex(head) returns expected output & sets new head correctly");
 
-        // Test clear()
-        list.clear();
-        assert list.getHead() == null && list.getTail() == null && list.size() == 0;
-        System.out.println("PASSED - clear() sets head & tail to null, size to 0");
+        // // Test clear()
+        // list.clear();
+        // assert list.getHead() == null && list.getTail() == null && list.size() == 0;
+        // System.out.println("PASSED - clear() sets head & tail to null, size to 0");
     }
 }
