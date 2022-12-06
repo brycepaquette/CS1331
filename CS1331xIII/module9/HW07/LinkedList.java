@@ -94,6 +94,11 @@ public class LinkedList<T> implements List<T> {
             removedNode = pointer;
             head = pointer.getNext();
         }
+        else if (index == 0 && size == 1) {
+            removedNode = pointer;
+            head = null;
+            tail = null;
+        }
         else {
             for(int i = 0; i < index - 1; i++) {
                 pointer = pointer.getNext();
