@@ -111,7 +111,34 @@ public class LinkedList<T> implements List<T> {
     }
 
     public T remove(T data) {
-        return "string";
+        T foundData = null;
+        Node<T> pointer = head;
+        Node<T> prevNode;
+
+        if(isEmpty()) {
+            return null;
+        }
+        else if (pointer.getData() == data && pointer == head) {
+            foundData = pointer.getData();
+            head = pointer.getNext();
+        } 
+        else {
+            while (pointer != null) {
+                prevNode = pointer;
+                pointer = pointer.getNext();
+                if (pointer.getData() == data) {
+                    foundData = pointer.getData();
+                    prevNode.setNext(pointer.getNext());
+                    if(pointer == tail) {
+                        tail = prevNode;
+                    }
+                }
+            }
+        }
+        size -= 1;
+        return foundData;
+
+
     }
 
 
